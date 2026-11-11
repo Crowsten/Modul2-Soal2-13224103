@@ -7,6 +7,12 @@
  * Deskripsi : Peternak Bunga Matahari
  */
 
+ // https://www.geeksforgeeks.org/c/doubly-linked-list-in-c/
+ // https://www.geeksforgeeks.org/dsa/print-doubly-linked-list-in-reverse-order/
+ // https://www.geeksforgeeks.org/dsa/search-an-element-in-a-linked-list-iterative-and-recursive/
+ // https://stackoverflow.com/questions/2970880/using-scanf-in-a-while-loop
+ //[1]	R. Darmakusuma et al., Modul Praktikum EL2008 Pemecahan Masalah dengan Pemrograman. Bandung: Program Studi Teknik Elektro, Institut Teknologi Bandung, 2026.
+
 #include <stdio.h>
 #include <stdlib.h>
 
