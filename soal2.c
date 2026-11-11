@@ -1,11 +1,11 @@
-/** 
- * EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025 
- * Modul : Dynamic Structures 
- * Hari dan Tanggal : Rabu 11 November 2026 
- * Nama (NIM) : Jonathan Chandra (13224103) 
- * Nama File : Soal2.c 
- * Deskripsi : Peternak Bunga Matahari 
- * */ 
+/**
+ * EL2008 Praktikum Pemecahan Masalah dengan Pemrograman 2024/2025
+ * Modul : Dynamic Structures
+ * Hari dan Tanggal : Rabu 11 November 2026
+ * Nama (NIM) : Jonathan Chandra (13224103)
+ * Nama File : Soal2.c
+ * Deskripsi : Peternak Bunga Matahari
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,14 +18,18 @@ typedef struct Node {
 
 Node* CreateNode(int tinggi) {
     Node* NewNode = (Node*)malloc(sizeof(Node));
-    NewNode->tinggi = tinggi;
-    NewNode->next = NULL;
-    NewNode->prev = NULL;
+    if (NewNode != NULL) {
+        NewNode->tinggi = tinggi;
+        NewNode->next = NULL;
+        NewNode->prev = NULL;
+    }
     return NewNode;
 }
 
 void insertTail(Node **head, Node **tail, int tinggi) {
     Node* NewNode = CreateNode(tinggi);
+    if (NewNode == NULL) return;
+
     if (*head == NULL) {
         *head = NewNode;
         *tail = NewNode;
@@ -48,33 +52,37 @@ void freeList(Node *head) {
 int main() {
     Node *head = NULL;
     Node *tail = NULL;
-    int n, tinggi, count;
+    int tinggi;
+    int count = 0;
+    int lokasi = 0;
 
-    if (scanf("%d", &n) != 1) return 0;
-
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &tinggi);
+    while (scanf("%d", &tinggi) == 1) {
         insertTail(&head, &tail, tinggi);
     }
 
-    if (head != NULL) {
-        Node *curr = head;
-        while (curr != NULL) {
-            int a = (curr->prev == NULL) || (curr->tinggi < curr->prev->tinggi);
-            int b = (curr->next == NULL) || (curr->tinggi < curr->next->tinggi);
-            
-            if (a && b) {
-                printf("%d", curr->tinggi);
+    Node *curr = head;
+    while (curr != NULL) {
+        lokasi++;
+        if (curr->prev != NULL && curr->next != NULL) {
+            if (curr->tinggi < curr->prev->tinggi && curr->tinggi < curr->next->tinggi) {
+                if (count > 0) {
+                    printf(" ");
+                }
+                printf("%d", lokasi);
                 count++;
             }
-            curr = curr->next;
         }
-
-    freeList(head);
-    return 0;
+        curr = curr->next;
     }
-    if (count == 0){
+
+    if (count == 0) {
         printf("NONE");
     }
-}
+    printf("\n");
 
+    freeList(head);
+    head = NULL;
+    tail = NULL;
+
+    return 0;
+}
